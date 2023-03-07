@@ -2,9 +2,8 @@ package com.example.demo2;
 
 
 import com.example.demo2.model.Answer;
-import com.example.demo2.model.Questions;
+import com.example.demo2.model.Question;
 import io.smallrye.mutiny.Multi;
-import org.jboss.logging.annotations.Pos;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -22,7 +21,7 @@ public class QuestionAnswer {
 
     @POST
     @Path("/ask")
-    public void sendQuestions(Questions questions) {
+    public void sendQuestions(Question questions) {
         consumer.send(questions);
     }
 

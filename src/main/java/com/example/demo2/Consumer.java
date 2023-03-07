@@ -1,7 +1,7 @@
 package com.example.demo2;
 
 import com.example.demo2.model.Answer;
-import com.example.demo2.model.Questions;
+import com.example.demo2.model.Question;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.reactive.messaging.MutinyEmitter;
@@ -12,7 +12,7 @@ import org.eclipse.microprofile.reactive.messaging.Outgoing;
 public class Consumer {
 
     @Channel("questions")
-    MutinyEmitter<Questions> questionEmitter;
+    MutinyEmitter<Question> questionEmitter;
 
 
     @Channel("answer")
@@ -20,18 +20,18 @@ public class Consumer {
 
 
     //Emit messages
-    public void send(Questions q) {
+    public void send(Question q) {
         Uni<Void> send = questionEmitter.send(q);
     }
 
 
     @Incoming("questions")
     @Outgoing("answer")
-    public Answer getQuestions(Questions q){
+    public Answer processQuestions(Question q) {
         return answerQuestion(q);
     }
 
-    private Answer answerQuestion(Questions q) {
+    private Answer answerQuestion(Question q) {
         return new Answer(q.generateAnswer());
     }
 
@@ -39,4 +39,6 @@ public class Consumer {
     public Multi<Answer> getAnswer() {
         return answer;
     }
+
+
 }

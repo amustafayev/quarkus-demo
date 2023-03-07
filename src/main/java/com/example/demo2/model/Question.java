@@ -1,6 +1,6 @@
 package com.example.demo2.model;
 
-public class Questions {
+public class Question {
     private String text;
     private String difficultyLevel;
     public void setText(String text) {
@@ -19,7 +19,7 @@ public class Questions {
         return text;
     }
 
-    public Questions(String text, String difficultyLevel) {
+    public Question(String text, String difficultyLevel) {
         this.text = text;
         this.difficultyLevel = difficultyLevel;
     }
